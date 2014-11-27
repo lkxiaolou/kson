@@ -1,6 +1,5 @@
 <?php
     //核心类
-    
     class Kson {
         
         //系统开始时间
@@ -34,7 +33,7 @@
         //获取m
         public static function getM()
         {
-            return isset($_GET[self::getConfig('mName')]) ? $_GET[self::getConfig('mName')] : $self::getConfig('mDefault');
+            return isset($_GET[self::getConfig('mName')]) ? $_GET[self::getConfig('mName')] : self::getConfig('mDefault');
         }
         
         //获取c
@@ -77,6 +76,7 @@
         public static function loadClass($class_name)
         {
             $file_path = APP_PATH . '/' . self::getConfig('cDir') . '/' . $class_name . self::getConfig('FileExt');
+            //dd($file_path);
             if(file_exists($file_path)){
                 require_once($file_path);
                 if(class_exists($class_name)){
