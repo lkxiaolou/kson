@@ -6,9 +6,12 @@
             
         }
         
-        function init1()
+        function init()
         {
-            die('ok');
+            $sql = 'select ad from admin limit 10';
+        	$mysql = Mysql::getMysql();
+            $data = $mysql->runSql($sql);
+        	dd($data);
         }
     }
 ?>

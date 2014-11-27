@@ -1,4 +1,5 @@
 <?php
+	if(!defined('IS_KSON')) die('Access Denied!');
     //核心类
     class Kson {
         
@@ -19,14 +20,23 @@
         //单例模式不允许复制
         public function __clone()
         {
-            die(self::getLang('clone is not allow'));
+            die(Fun::getLang('clone is not allow'));
+        }
+        
+        //获取单例
+        public static function get_app()
+        {
+        	if(!(self::$_app instanceof self)){
+        		self::$_app = new self();
+        	}
+        	return self::$_app;
         }
         
         //执行
         public static function run()
         {
             //初始化
-            self::$_app = new Kson();
+            self::$_app = self::get_app();
             //运行前
             self::$_app->beforeRun();
             //运行
@@ -39,44 +49,19 @@
         //获取c
         public static function getC()
         {
-            return isset($_GET[self::getConfig('cName')]) ? $_GET[self::getConfig('cName')] : self::getConfig('cDefault');
+            return isset($_GET[Fun::getConfig('cName')]) ? $_GET[Fun::getConfig('cName')] : Fun::getConfig('cDefault');
         }
         
         //获取a
         public static function getA()
         {
-            return isset($_GET[self::getConfig('aName')]) ? $_GET[self::getConfig('aName')] : self::getConfig('aDefault');
-        }
-        
-        //获取配置文件
-        public static function getConfig($index = '')
-        {
-            global $kson_config;
-            if($index !== ''){
-                return $kson_config[$index];
-            }
-            else{
-                return $kson_config;
-            }
-        }
-        
-        //获取语言文件
-        public static function getLang($index = '')
-        {
-            global $kson_lang;
-            if($index !== ''){
-                return $kson_lang[$index];
-            }
-            else{
-                return $kson_lang;
-            }
+            return isset($_GET[Fun::getConfig('aName')]) ? $_GET[Fun::getConfig('aName')] : Fun::getConfig('aDefault');
         }
         
         //加载
         public static function loadClass($class_name)
         {
-            $file_path = APP_PATH . '/' . self::getConfig('cDir') . '/' . $class_name . self::getConfig('FileExt');
-            //dd($file_path);
+            $file_path = APP_PATH . '/' . Fun::getConfig('cDir') . '/' . $class_name . Fun::getConfig('FileExt');
             if(file_exists($file_path)){
                 require_once($file_path);
                 if(class_exists($class_name)){
@@ -84,11 +69,11 @@
                     return $obj;
                 }
                 else{
-                    die(self::getLang('class not exists'));
+                    die(Fun::getLang('class not exists'));
                 }
             }
             else{
-                die(self::getLang('file not exists'));
+                die(Fun::getLang('file not exists'));
             }
         }
         
@@ -97,7 +82,7 @@
         {
             //判断方法是否存在
             if(!method_exists($this->_cObj, $this->_a)){
-                die(self::getLang('action not exists'));
+                die(Fun::getLang('action not exists'));
             }
             return true;
         }
