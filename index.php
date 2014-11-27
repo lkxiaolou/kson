@@ -1,6 +1,8 @@
 <?php
     //utf-8编码
     header("Content-Type:text/html; charset=utf-8");
+    //载入调试类kint
+    require('./ext/Kint/Kint.class.php');
     //载入配置
     require('./core/kson.config.php');
     //载入语言
