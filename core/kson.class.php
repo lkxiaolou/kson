@@ -16,6 +16,12 @@
             $this->init();
         }
         
+        //单例模式不允许复制
+        public function __clone()
+        {
+            die(self::getLang('clone is not allow'));
+        }
+        
         //执行
         public static function run()
         {
