@@ -36,12 +36,6 @@
             self::$_app->afterRun();
         }
         
-        //获取m
-        public static function getM()
-        {
-            return isset($_GET[self::getConfig('mName')]) ? $_GET[self::getConfig('mName')] : self::getConfig('mDefault');
-        }
-        
         //获取c
         public static function getC()
         {

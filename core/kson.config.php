@@ -1,7 +1,6 @@
 <?php
     //核心配置文件
     
-    $kson_config['mName'] = 'm';
     $kson_config['cName'] = 'c';
     $kson_config['aName'] = 'a';
     
