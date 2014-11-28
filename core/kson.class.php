@@ -10,7 +10,7 @@
         //控制器对象
         private $_cObj = null;
         //方法名称
-        private $_a = null;
+        public $_a = null;
         
         private function __construct()
         {
