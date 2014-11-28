@@ -58,6 +58,9 @@
 			    $e->error();
 			}
 			$data = array();
+			if($result === true){
+			    return $result;
+			}
 			while($row = mysql_fetch_array($result))
 			{
 				$data[] = $row;
