@@ -50,5 +50,11 @@
 				return $app_lang;
 			}
 		}
+		
+	    //抛出错误
+        public static function throwError($message, $code)
+        {
+            throw new KsonException($message, $code = 1000);
+        }
 	}
 ?>
