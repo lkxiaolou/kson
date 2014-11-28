@@ -17,12 +17,6 @@
             $this->init();
         }
         
-        //单例模式不允许复制
-        public function __clone()
-        {
-            die(Fun::getLang('clone is not allow'));
-        }
-        
         //获取单例
         public static function get_app()
         {
@@ -37,13 +31,17 @@
         {
             //初始化
             self::$_app = self::get_app();
-            //运行前
-            self::$_app->beforeRun();
-            //运行
-            $a = self::$_app->_a;
-            self::$_app->_cObj->$a();
-            //运行后
-            self::$_app->afterRun();
+            try{
+                //运行前
+                self::$_app->beforeRun();
+                //运行
+                $a = self::$_app->_a;
+                self::$_app->_cObj->$a();
+                //运行后
+                self::$_app->afterRun();
+            }catch(KsonException $e){
+                $e->error();
+            }
         }
         
         //获取c
@@ -69,11 +67,11 @@
                     return $obj;
                 }
                 else{
-                    die(Fun::getLang('class not exists'));
+                    Fun::throwErrow(Fun::getLang('class not exists'));
                 }
             }
             else{
-                die(Fun::getLang('file not exists'));
+                Fun::throwError(Fun::getLang('file not exists'));
             }
         }
         
@@ -82,7 +80,7 @@
         {
             //判断方法是否存在
             if(!method_exists($this->_cObj, $this->_a)){
-                die(Fun::getLang('action not exists'));
+                Fun::throwError(Fun::getLang('action not exists'));
             }
             return true;
         }
@@ -101,5 +99,6 @@
             $this->_cObj = self::loadClass(self::getC());
             $this->_a = self::getA();
         }
+        
     }
 ?>
