@@ -11,11 +11,6 @@
 			$this->connect();
 		}
 		
-		public function __clone()
-		{
-			die(Fun::getConfig('clone is not allow'));
-		}
-		
 		public function __destruct()
 		{
 			mysql_close($this->conn);
@@ -40,10 +35,13 @@
 			$pwd = Fun::getAppConfig('MysqlPwd');
 			try{
 				$this->conn = mysql_connect($host, $user, $pwd);
+				if(!$this->conn){
+				    Fun::throwError('mysql connect error');
+				}
 				mysql_select_db($dbName, $this->conn);
 				mysql_set_charset('utf8', $this->conn);
-			}catch (ErrorException $e){
-				die($e->getMessage());
+			}catch (KsonException $e){
+				$e->error();
 			}
 
 		}
@@ -51,17 +49,21 @@
 		//执行sql语句
 		public function runSql($sql)
 		{
-			$result = mysql_query($sql, $this->conn);
-			$data = array();
 			try{
-				while($row = mysql_fetch_array($result))
-				{
-					$data[] = $row;
-				}
-			}catch(ErrorException $e){
-				die($e->getMessage());
+    		    $result = mysql_query($sql, $this->conn);
+    			if($result === false){
+    			    Fun::throwError(Fun::getLang('mysql query error'));
+    			}
+			}catch(KsonException $e){
+			    $e->error();
+			}
+			$data = array();
+			while($row = mysql_fetch_array($result))
+			{
+				$data[] = $row;
 			}
 			return $data;
 		}
+		
 	}
 ?>
