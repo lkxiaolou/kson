@@ -10,6 +10,8 @@
 	require(ROOT_PATH . '/core/Fun.class.php');
 	//载入核心类
 	require(ROOT_PATH . '/core/kson.class.php');
+	//载入异常类
+    require (ROOT_PATH . '/core/KsonException.class.php');
 	//载入项目配置
 	require(APP_PATH . '/config/config.php');
 	//载入Mysql类
