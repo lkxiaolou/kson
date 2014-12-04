@@ -13,7 +13,9 @@
 		
 		public function __destruct()
 		{
-			mysql_close($this->conn);
+			if(is_resource($this->conn)){
+				mysql_close($this->conn);
+			}
 		}
 		
 		//获取mysql对象单例
@@ -61,7 +63,7 @@
 			if($result === true){
 			    return $result;
 			}
-			while($row = mysql_fetch_array($result))
+			while($row = mysql_fetch_array($result, MYSQL_ASSOC))
 			{
 				$data[] = $row;
 			}

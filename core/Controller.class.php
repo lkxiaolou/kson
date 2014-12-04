@@ -3,6 +3,7 @@
     class Controller{
         
         private $v = null;//view对象
+        private $var = array();
         
         //显示模版文件
         public function display($view_name = '')
@@ -11,14 +12,20 @@
                 $app = Kson::get_app();
                 $view_name = $app->_a;
             }
-            $this->init($view_name);
+            $this->_init($view_name);
             $this->v->display();
         }
         
         //初始化
-        private function init($view_name)
+        private function _init($view_name)
         {
-            $this->v = new View($view_name);
+            $this->v = new View($view_name, $this->var);
+        }
+        
+        //变量赋值
+        public function assign($name, $value)
+        {
+        	$this->var[$name] = $value;
         }
     }
 ?>

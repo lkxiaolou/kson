@@ -28,8 +28,12 @@
         //判断是否为ajax请求
         private function isAjax()
         {
-            if ($_SERVER['HTTP_X_REQUESTED_WITH'] && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') return true;
-            if ($_POST['is_ajax'] || $_GET['is_ajax']) return true;
+            if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') return true;
+            if (isset($_POST['is_ajax']) || isset($_GET['is_ajax'])) {
+            	if($_POST['is_ajax'] || $_GET['is_ajax']){
+            		return true;
+            	}
+            }
             return false;
         }
     

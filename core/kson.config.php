@@ -10,7 +10,7 @@
     
     $kson_config['mDefault'] = '';
     $kson_config['cDefault'] = 'index';
-    $kson_config['aDefault'] = 'init';
+    $kson_config['aDefault'] = 'index';
     
     $kson_config['FileExt'] = '.class.php';
     

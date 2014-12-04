@@ -52,7 +52,7 @@
 		}
 		
 	    //抛出错误
-        public static function throwError($message, $code)
+        public static function throwError($message, $code = 1000)
         {
             throw new KsonException($message, $code = 1000);
         }
