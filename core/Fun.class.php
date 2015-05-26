@@ -6,11 +6,10 @@
 		//获取系统配置文件
 		public static function getConfig($index = '')
 		{
-			global $kson_config;
+		    global $kson_config;
 			if($index !== ''){
 				return $kson_config[$index];
-			}
-			else{
+			}else{
 				return $kson_config;
 			}
 		}

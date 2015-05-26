@@ -17,12 +17,10 @@
             }
             //是否为ajax请求
             if($this->isAjax()){
-                echo json_encode(array('msg' => $this->message, 'code' => $this->code));
+                exit(json_encode(array('msg' => $this->message, 'code' => $this->code)));
+            }else{
+                exit($this->message);
             }
-            else{
-                echo $this->message;
-            }
-            die();
         }
         
         //判断是否为ajax请求

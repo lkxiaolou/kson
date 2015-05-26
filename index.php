@@ -6,6 +6,6 @@
     //定义app入口
     define('APP_PATH', ROOT_PATH . '/app');
     //初始化
-    require_once(ROOT_PATH . '/core/init.php');
+    require(ROOT_PATH . '/core/init.php');
     kson::run();
 ?>

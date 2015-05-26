@@ -60,6 +60,7 @@
         public static function loadClass($class_name)
         {
             $file_path = APP_PATH . '/' . Fun::getConfig('cDir') . '/' . $class_name . Fun::getConfig('FileExt');
+            
             if(file_exists($file_path)){
                 require_once($file_path);
                 if(class_exists($class_name)){
